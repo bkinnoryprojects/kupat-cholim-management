@@ -1,8 +1,10 @@
 <?php
 
 require('dbpdo.class.php');
-	if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-		//If the customer requested to withdraw a specific person
+db('localhost', 'root', '1234', 'kupat_cholim', 'utf8mb4');
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+	//If the customer requested to withdraw a specific person
 	if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		$id = $_GET['id'];
 		$people = db()->fetchAll("
@@ -42,6 +44,7 @@ require('dbpdo.class.php');
 		echo json_encode($people, JSON_PRETTY_PRINT);
 	}
 }
+//****************** POST****************************************
 $ALLresponse=[];
 // Route for inserting a new record into PersonalInfo table
 //Requires input of first name, last name and ID card

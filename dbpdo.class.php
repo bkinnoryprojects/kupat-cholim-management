@@ -43,7 +43,7 @@ class dbpdo {
         catch(PDOException $e) {
             $this->connected = false;
             if ($this->errors === true) {
-                return $this->error($e->getMessage());
+                return $this->error($e->getMessage(), '', '');
             } else {
                 return false;
             }
@@ -171,11 +171,11 @@ function sql_escape($value) {
     return $return;
 }
 
-function db() {
+function db($host = null, $user = null, $pass = null, $db = null, $charset = null) {
     static $DB = null;
 
     if (!isset($DB)) {
-        $DB = new dbpdo('localhost', 'root', '1234', 'test', 'utf8mb4');
+        $DB = new dbpdo($host, $user, $pass, $db, $charset);
     }
 
     return $DB;
